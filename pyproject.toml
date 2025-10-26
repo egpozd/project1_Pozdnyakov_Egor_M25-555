@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "labyrinth-game"
+version = "0.1.0"
+description = "Labyrinth game project"
+authors = ["Egor Pozdnyakov <your@email.com>"]
+
+packages = [
+    { include = "labyrinth_game" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.scripts]
+project = "labyrinth_game.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+exclude = ["venv", ".venv", "dist", "__pycache__"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = []
