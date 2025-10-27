@@ -1,5 +1,6 @@
 # labyrinth_game/player_actions.py
 from constants import ROOMS
+from utils import random_event
 
 def show_inventory(game_state):
     """Показать инвентарь игрока"""
@@ -18,19 +19,34 @@ def get_input(prompt="> "):
         return "quit"
 
 def move_player(game_state, direction):
-    """Перемещение игрока"""
+    """Перемещение игрока с проверкой доступа к treasure_room"""
     current_room = game_state['current_room']
     room_data = ROOMS[current_room]
     
     if direction in room_data['exits']:
         new_room = room_data['exits'][direction]
-        game_state['current_room'] = new_room
-        game_state['steps_taken'] += 1
+        
+        # Особенная проверка для перехода в treasure_room
+        if new_room == 'treasure_room':
+            if 'rusty_key' in game_state['player_inventory']:
+                print("Вы используете найденный ключ, чтобы открыть путь в комнату сокровищ.")
+                game_state['current_room'] = new_room
+                game_state['steps_taken'] += 1
+            else:
+                print("Дверь заперта. Нужен ключ, чтобы пройти дальше.")
+                return
+        else:
+            game_state['current_room'] = new_room
+            game_state['steps_taken'] += 1
+        
         print(f"Вы переместились в {new_room}.")
         
         # Импортируем здесь, чтобы избежать циклических импортов
         from utils import describe_current_room
         describe_current_room(game_state)
+        
+        # Вызываем случайное событие после перемещения
+        random_event(game_state)
     else:
         print("Нельзя пойти в этом направлении.")
 
@@ -66,5 +82,9 @@ def use_item(game_state, item_name):
             game_state['player_inventory'].append('rusty_key')
         else:
             print("Шкатулка пуста.")
+    elif item_name == 'coin':
+        print("Вы подбрасываете монетку. Она блестит в свете факела.")
+    elif item_name == 'wisdom_scroll':
+        print("Вы читаете свиток: 'Мудрость - это понимание того, что ключ не всегда открывает то, что ожидаешь'")
     else:
         print(f"Вы не знаете, как использовать {item_name}.")

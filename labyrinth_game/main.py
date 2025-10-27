@@ -9,7 +9,7 @@
 
 
 # labyrinth_game/main.py
-from constants import ROOMS
+from constants import ROOMS, COMMANDS
 from player_actions import move_player, take_item, show_inventory, use_item, get_input
 from utils import describe_current_room, solve_puzzle, attempt_open_treasure, show_help
 
@@ -22,13 +22,18 @@ game_state = {
 }
 
 def process_command(game_state, command):
-    """Обработка команд пользователя"""
+    """Обработка команд пользователя с поддержкой односложных команд движения"""
     parts = command.split()
     if not parts:
         return
     
     cmd = parts[0]
     arg = " ".join(parts[1:]) if len(parts) > 1 else ""
+    
+    # Обработка односложных команд движения
+    if cmd in ['north', 'south', 'east', 'west']:
+        move_player(game_state, cmd)
+        return
     
     match cmd:
         case 'look':
@@ -56,13 +61,14 @@ def process_command(game_state, command):
             show_inventory(game_state)
         
         case 'solve':
+            # В treasure_room используем attempt_open_treasure вместо solve_puzzle
             if game_state['current_room'] == 'treasure_room':
                 attempt_open_treasure(game_state)
             else:
                 solve_puzzle(game_state)
         
         case 'help':
-            show_help()
+            show_help(COMMANDS)
         
         case 'quit' | 'exit':
             print("Спасибо за игру!")
