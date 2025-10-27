@@ -1,15 +1,17 @@
 [tool.poetry]
 name = "labyrinth-game"
-version = "0.1.0"
+version = "1.0.0"
 description = "Labyrinth game project"
-authors = ["Egor Pozdnyakov <your@email.com>"]
+authors = ["Egor Pozdnyakov <g17or@yandex.ru>"]
+readme = "README.md"
+
 
 packages = [
     { include = "labyrinth_game" },
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.12.10"
 
 [tool.poetry.scripts]
 project = "labyrinth_game.main:main"
@@ -23,10 +25,23 @@ line-length = 88
 target-version = "py311"
 exclude = ["venv", ".venv", "dist", "__pycache__"]
 
+
 [tool.ruff.lint]
-select = ["E", "F", "I"]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+]
 ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["labyrinth_game"]
+
+
 [dependency-groups]
 dev = [
+    "asciinema (>=2.4.0,<3.0.0)",
     "ruff (>=0.14.2,<0.15.0)"
 ]

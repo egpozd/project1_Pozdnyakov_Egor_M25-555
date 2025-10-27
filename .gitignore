@@ -1,5 +1,33 @@
+# Poetry
 .venv/
-dist/
+poetry.lock
+
+# Python
 __pycache__/
 *.pyc
-.python-version
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.log

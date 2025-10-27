@@ -1,11 +1,11 @@
-# labyrinth_game/utils.py
+"""Вспомогательные функции для игры Лабиринт сокровищ."""
 import math
 
 from constants import ROOMS
 
 
 def pseudo_random(seed, modulo):
-    """Псевдослучайный генератор на основе синуса"""
+    """Псевдослучайный генератор на основе синуса."""
     x = math.sin(seed * 12.9898) * 43758.5453
     fractional_part = x - math.floor(x)
     result = fractional_part * modulo
@@ -13,7 +13,7 @@ def pseudo_random(seed, modulo):
 
 
 def trigger_trap(game_state):
-    """Активация ловушки"""
+    """Активация ловушки."""
     print("Ловушка активирована! Пол стал дрожать...")
 
     inventory = game_state['player_inventory']
@@ -34,7 +34,7 @@ def trigger_trap(game_state):
 
 
 def random_event(game_state):
-    """Случайные события при перемещении"""
+    """Случайные события при перемещении."""
     # Проверяем, произойдет ли событие (10% вероятность)
     event_chance = pseudo_random(game_state['steps_taken'], 10)
 
@@ -70,7 +70,7 @@ def random_event(game_state):
 
 
 def describe_current_room(game_state):
-    """Описание текущей комнаты"""
+    """Описание текущей комнаты."""
     current_room = game_state['current_room']
     room_data = ROOMS[current_room]
 
@@ -96,7 +96,7 @@ def describe_current_room(game_state):
 
 
 def solve_puzzle(game_state):
-    """Решение загадки в текущей комнате с альтернативными ответами"""
+    """Решение загадки в текущей комнате с альтернативными ответами."""
     current_room = game_state['current_room']
     room_data = ROOMS[current_room]
 
@@ -143,7 +143,7 @@ def solve_puzzle(game_state):
 
 
 def attempt_open_treasure(game_state):
-    """Попытка открыть сундук с сокровищами"""
+    """Попытка открыть сундук с сокровищами."""
     current_room = game_state['current_room']
 
     if current_room != 'treasure_room':
@@ -189,7 +189,7 @@ def attempt_open_treasure(game_state):
 
 
 def show_help(commands):
-    """Показать справку по командам с красивым форматированием"""
+    """Показать справку по командам с красивым форматированием."""
     print("\nДоступные команды:")
     for command, description in commands.items():
-        print(f"  {command:<16} - {description}")
+        print(f"  {command:<16} - {description}\n")

@@ -1,6 +1,12 @@
-# labyrinth_game/constants.py
+"""Константы и данные игры."""
+from typing import Any, Dict
 
-ROOMS = {
+# Типы для аннотаций
+RoomDict = Dict[str, Any]
+RoomsDict = Dict[str, RoomDict]
+CommandDict = Dict[str, str]
+
+ROOMS: RoomsDict = {
     'entrance': {
         'description': (
             'Вы в темном входе лабиринта. Стены покрыты мхом. '
@@ -15,10 +21,15 @@ ROOMS = {
             'Большой зал с эхом. По центру стоит пьедестал '
             'с запечатанным сундуком.'
         ),
-        'exits': {'south': 'entrance', 'west': 'library', 'north': 'treasure_room'},
+        'exits': {
+            'south': 'entrance',
+            'west': 'library',
+            'north': 'treasure_room'
+        },
         'items': [],
         'puzzle': (
-            'На пьедестале надпись: "Назовите число, которое идет после девяти". '
+            'На пьедестале надпись: "Назовите число, '
+            'которое идет после девяти". '
             'Введите ответ цифрой или словом.',
             '10'
         )
@@ -44,7 +55,8 @@ ROOMS = {
         'exits': {'east': 'hall', 'north': 'armory'},
         'items': ['ancient_book'],
         'puzzle': (
-            'В одном свитке загадка: "Что растет, когда его съедают?" '
+            'В одном свитке загадка: "Что растет, '
+            'когда его съедают?" '
             '(ответ одно слово)',
             'резонанс'
         )
@@ -73,7 +85,7 @@ ROOMS = {
     }
 }
 
-COMMANDS = {
+COMMANDS: CommandDict = {
     "go <direction>": "перейти в направлении (north/south/east/west)",
     "look": "осмотреть текущую комнату",
     "take <item>": "поднять предмет",
@@ -81,5 +93,5 @@ COMMANDS = {
     "inventory": "показать инвентарь",
     "solve": "попытаться решить загадку в комнате",
     "quit": "выйти из игры",
-    "help": "показать это сообщение"
+    "help": "показать это сообщение\n"
 }

@@ -1,1 +1,0 @@
-# labyrinth_game/__init__.py

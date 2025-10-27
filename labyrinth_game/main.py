@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
-
-# labyrinth_game/main.py
+"""Главный модуль игры Лабиринт сокровищ."""
 from constants import COMMANDS
 from player_actions import (
     get_input,
@@ -26,7 +24,7 @@ game_state = {
 
 
 def process_command(game_state, command):
-    """Обработка команд пользователя с поддержкой односложных команд движения"""
+    """Обработка команд пользователя с поддержкой односложных команд движения."""
     parts = command.split()
     if not parts:
         return
@@ -83,7 +81,7 @@ def process_command(game_state, command):
 
 
 def main():
-    """Основная функция игры"""
+    """Основная функция игры."""
     print("Добро пожаловать в Лабиринт сокровищ!")
     describe_current_room(game_state)
 
