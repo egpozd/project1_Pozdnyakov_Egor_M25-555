@@ -15,12 +15,14 @@
 
 ```bash
 poetry install
-
+```
 
 ## Запуск
 
 ```bash
 poetry run python labyrinth_game/main.py
+```
+
 
 ## Управление
 go <direction> - перемещение (north, south, east, west)
